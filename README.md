@@ -57,6 +57,7 @@ You can keep the default CIDR block for the public subnet, or alternatively you 
   You can use Amazon EC2 Auto Scaling to deploy servers in multiple Availability Zones and maintain the minimum server capacity required by your application.
 
 - To launch instances by using an Auto Scaling group
+  
   Create a launch template to specify the configuration information needed to launch your EC2 instances by using Amazon EC2 Auto Scaling. For step-by-step directions, see Create a 
   launch template for your Auto Scaling group in the Amazon EC2 Auto Scaling User Guide.
 
@@ -153,7 +154,7 @@ Do one of the following:
 
 - For Auto Scaling group name, enter a name for your Auto Scaling group.
 
-- For Launch template, choose an existing launch template.
+- For Launch template, choose an existing launch template(that we have created above).
 
 - For Launch template version, choose whether the Auto Scaling group uses the default, the latest, or a specific version of the launch template when scaling out.
 
@@ -176,34 +177,117 @@ Do one of the following:
 
 - (Optional) On the Configure advanced options page, configure the following options, and then choose Next:
 
-To register your Amazon EC2 instances with a load balancer, choose an existing load balancer or create a new one. For more information, see Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group. To create a new load balancer, follow the procedure in Configure an Application Load Balancer or Network Load Balancer from the Amazon EC2 Auto Scaling console.
+- To register your Amazon EC2 instances with a load balancer, choose an existing load balancer or create a new one. For more information, see Use Elastic Load Balancing to distribute 
+  traffic across the instances in your Auto Scaling group. To create a new load balancer, follow the procedure in Configure an Application Load Balancer or Network Load Balancer from 
+  the Amazon EC2 Auto Scaling console.
 
-(Optional) For Health checks, Additional health check types, select Turn on Elastic Load Balancing health checks.
+- (Optional) For Health checks, Additional health check types, select Turn on Elastic Load Balancing health checks.
 
-(Optional) For Health check grace period, enter the amount of time, in seconds. This is how long Amazon EC2 Auto Scaling needs to wait before checking the health status of an instance after it enters the InService state. For more information, see Set the health check grace period for an Auto Scaling group.
+- (Optional) For Health check grace period, enter the amount of time, in seconds. This is how long Amazon EC2 Auto Scaling needs to wait before checking the health status of an i 
+  instance after it enters the InService state. For more information, see Set the health check grace period for an Auto Scaling group.
 
-Under Additional settings, Monitoring, choose whether to enable CloudWatch group metrics collection. These metrics provide measurements that can be indicators of a potential issue, such as number of terminating instances or number of pending instances. For more information, see Monitor CloudWatch metrics for your Auto Scaling groups and instances.
+  Under Additional settings, Monitoring, choose whether to enable CloudWatch group metrics collection. These metrics provide measurements that can be indicators of a potential issue, 
+  such as number of terminating instances or number of pending instances. For more information, see Monitor CloudWatch metrics for your Auto Scaling groups and instances.
 
-For Enable default instance warmup, select this option and choose the warm-up time for your application. If you are creating an Auto Scaling group that has a scaling policy, the default instance warmup feature improves the Amazon CloudWatch metrics used for dynamic scaling. For more information, see Set the default instance warmup for an Auto Scaling group.
+  For Enable default instance warmup, select this option and choose the warm-up time for your application. If you are creating an Auto Scaling group that has a scaling policy, the 
+  default instance warmup feature improves the Amazon CloudWatch metrics used for dynamic scaling. For more information, see Set the default instance warmup for an Auto Scaling group.
 
-On the Configure group size and scaling policies page, configure the following options, and then choose Next:
+- On the Configure group size and scaling policies page, configure the following options, and then choose Next:
 
-For Desired capacity, select 2, for minimum capacity select 1, for maximum capacity select 4
+- For Desired capacity, select 2, for minimum capacity select 1, for maximum capacity select 4
 
-To automatically scale the size of the Auto Scaling group, choose Target tracking scaling policy and follow the directions. For more information, see Target tracking scaling policies for Amazon EC2 Auto Scaling.
+- To automatically scale the size of the Auto Scaling group, choose Target tracking scaling policy and follow the directions. For more information, see Target tracking scaling 
+  policies for Amazon EC2 Auto Scaling.
 
-Under Instance scale-in protection, choose whether to enable instance scale-in protection. For more information, see Use instance scale-in protection.
+- Under Instance scale-in protection, choose whether to enable instance scale-in protection. For more information, see Use instance scale-in protection.
 
-(Optional) To receive notifications, for Add notification, configure the notification, and then choose Next. For more information, see Get Amazon SNS notifications when your Auto Scaling group scales.
+- (Optional) To receive notifications, for Add notification, configure the notification, and then choose Next. For more information, see Get Amazon SNS notifications when your Auto 
+  Scaling group scales.
 
-(Optional) To add tags, choose Add tag, provide a tag key and value for each tag, and then choose Next. For more information, see Tag Auto Scaling groups and instances.
+- (Optional) To add tags, choose Add tag, provide a tag key and value for each tag, and then choose Next. For more information, see Tag Auto Scaling groups and instances.
 
-On the Review page, choose Create Auto Scaling group.
+- On the Review page, choose Create Auto Scaling group.
 
 
 
 
 Create a load balancer, which distributes traffic evenly across the instances in your Auto Scaling group, and attach the load balancer to your Auto Scaling group. For more information, see the Elastic Load Balancing User Guide and Use Elastic Load Balancing in the Amazon EC2 Auto Scaling User Guide.
+
+Step 1: Configure your target group
+To configure your target group
+Open the Amazon EC2 console at https://console.aws.amazon.com/ec2/.
+
+- In the navigation pane, under Load Balancing, choose Target Groups.
+
+- Choose Create target group.
+
+- Under Basic configuration, keep the Target type as instance.
+
+- For Target group name, enter a name for the new target group.
+
+- Keep the default protocol (HTTP) and port (80).
+
+- Select the VPC containing your instances. Keep the protocol version as HTTP1.
+
+- For Health checks, keep the default settings.
+
+- Choose Next.
+
+Step 2: Choose a load balancer type
+
+- To create a Application Load Balancer
+- Open the Amazon EC2 console at https://console.aws.amazon.com/ec2/.
+
+- On the navigation bar, choose a Region for your load balancer. Be sure to choose the same Region that you used for your EC2 instances.
+
+- In the navigation pane, under Load Balancing, choose Load Balancers.
+
+- Choose Create Load Balancer.
+
+- For Application Load Balancer, choose Create.
+
+- On the Register targets page, complete the following steps. This is an optional step for creating the load balancer. However, you must register this target if you want to test your 
+  load balancer and ensure that it is routing traffic to this target.
+
+- For Available instances, select one or more instances.
+
+- Keep the default port 80, and choose Include as pending below.
+
+- Choose Create target group.
+
+
+#Create a Bastion host
+
+Open the Amazon EC2 console at https://console.aws.amazon.com/ec2/.
+
+Choose Launch Instance.
+
+- Step 1: Choose an Amazon Machine Image (AMI), find an Amazon Linux 2 AMI at the top of the list and choose Select.
+
+- Step 2: Choose an Instance Type, choose Next: Configure Instance Details.
+
+- Step 3: Configure Instance Details, provide the following information:
+  
+- Choose Next: Add Storage.
+
+- Choose Next: Add Tags.
+
+- Name your instance and choose Next: Configure Security Group.
+
+- In Step 4: Configure Security Group, set Assign a security group to Select an existing security group. Choose the default security group to make sure that it can access your EFS 
+  file system.
+
+- Choose Review and Launch.
+
+- Choose Launch.
+
+#To launch the private virtual machine in public virtual machine
+
+- Copy the public ip adress of bostion host.
+- open local terminal use shh and keypair to connect.
+- once connection is successfull
+- use ssh 
+
 
 Test your configuration
 After you've finished deploying your application, you can test it. If your application can't send or receive the traffic that you expect, you can use Reachability Analyzer to help you troubleshoot. For example, Reachability Analyzer can identify configuration issues with your route tables or security groups.
