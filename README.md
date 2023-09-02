@@ -11,7 +11,8 @@ The following diagram provides an overview of the resources included in this exa
 
 
 # Create the VPC
-Use the following procedure to create a VPC with a public subnet and a private subnet in two Availability Zones, and a NAT gateway in each Availability Zone.use documentation
+Use the following procedure to create a VPC with a public subnet and a private subnet in two Availability Zones, and a NAT gateway in each Availability Zone.use [use documentation]([url](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/gsg_create_vpc.html))
+
 
 # Create Auto Scaling group
   
