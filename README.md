@@ -11,13 +11,12 @@ The following diagram provides an overview of the resources included in this exa
 
 
 # Create the VPC
-Use the following procedure to create a VPC with a public subnet and a private subnet in two Availability Zones, and a NAT gateway in each Availability Zone.use [use documentation]([url](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/gsg_create_vpc.html))
-
+Use the following procedure to create a VPC with a public subnet and a private subnet in two Availability Zones, and a NAT gateway in each Availability Zone. [use documentation](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/gsg_create_vpc.html)
 
 # Create Auto Scaling group
   
   Create a launch template to specify the configuration information needed to launch your EC2 instances by using Amazon EC2 Auto Scaling. For step-by-step directions, see Create a 
-  launch template for your Auto Scaling group in the Amazon EC2 Auto Scaling User Guide.use documentation
+  launch template for your Auto Scaling group in the Amazon EC2 Auto Scaling User Guide.[use documentation](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-auto-scaling-groups-launch-template.html)
 
 # Create a launch template
 - Auto-assign public IP: Change whether your network interface with a device index of 0 receives a public IPv4 address. By default, instances in a default subnet receive a public IPv4 
@@ -31,16 +30,16 @@ Use the following procedure to create a VPC with a public subnet and a private s
 - For Availability Zones and subnets, choose only private subnets.
 - On the Configure group size and scaling policies page, configure the following options, and then choose Next:
 
-- For Desired capacity, select 2, for minimum capacity select 1, for maximum capacity select 4.use documentation
+- For Desired capacity, select 2, for minimum capacity select 1, for maximum capacity select 4.[use documentation](https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-launch-template.html)
 
 # Create Loadbalancer
-Create a load balancer, which distributes traffic evenly across the instances in your Auto Scaling group, and attach the load balancer to your Auto Scaling group. For more information, see the Elastic Load Balancing User Guide and Use Elastic Load Balancing in the Amazon EC2 Auto Scaling User Guide.use documentation
+Create a load balancer, which distributes traffic evenly across the instances in your Auto Scaling group, and attach the load balancer to your Auto Scaling group. For more information, see the Elastic Load Balancing User Guide and Use Elastic Load Balancing in the Amazon EC2 Auto Scaling User Guide.[use documentation](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-application-load-balancer.html)
 
 # Create target group
-Target groups route requests to one or more registered targets, such as EC2 instances, using the protocol and port number that you specify.use documentation
+Target groups route requests to one or more registered targets, such as EC2 instances, using the protocol and port number that you specify.[use documentation](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-target-group.html)
 
-# Create a Bastion host
-A bastion host is a server whose purpose is to provide access to a private network from an external network, such as the Internet.use documentation
+# Create a Bastion host(EC2 instance)
+A bastion host is a server whose purpose is to provide access to a private network from an external network, such as the Internet.[use documentation](https://docs.aws.amazon.com/efs/latest/ug/gs-step-one-create-ec2-resources.html)
 
 # To launch the private virtual machine in public virtual machine
 - Copy the public ip adress of bostion host.
